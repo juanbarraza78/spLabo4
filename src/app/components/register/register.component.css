@@ -1,0 +1,10 @@
+.containerBackground {
+  margin-top: 180px;
+}
+.min-100vh {
+  min-height: 100vh;
+  background-image: url("../../../assets/imgs/background-plant.png");
+}
+.colorMain {
+  background-color: #009970;
+}

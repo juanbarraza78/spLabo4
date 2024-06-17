@@ -1,0 +1,286 @@
+<div class="bg-info d-flex justify-content-center align-items-center min-100vh">
+  <div class="bg-white p-5 rounded-5 text-secondary shadow containerBackground">
+    <div class="d-flex justify-content-center">
+      <img
+        src="../../../assets/imgs/login-icon.svg"
+        alt="login-icon"
+        style="height: 7rem"
+      />
+    </div>
+    <div class="text-center fs-1 fw-bold">Sing Up</div>
+    <!-- Form Paciente -->
+    @if(opcionAlta == "paciente"){
+    <form [formGroup]="formPaciente" (ngSubmit)="onSubmitPaciente()">
+      <!-- Correo electronico -->
+      <div class="input-group mt-4">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="mail"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Email"
+        />
+      </div>
+      <!-- Contraseña -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/password-icon.svg"
+            alt="password-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="password"
+          class="form-control bg-light"
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+      <!-- Nombre Y apellido -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="nombre"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Nombre"
+          required
+        />
+        <input
+          formControlName="apellido"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Apellido"
+          required
+        />
+      </div>
+      <!-- Edad Y Dni -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="edad"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Edad"
+          required
+        />
+
+        <input
+          formControlName="dni"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Dni"
+          required
+        />
+      </div>
+      <!-- Obra Social -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="obraSocial"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Obra Social"
+        />
+      </div>
+      <!-- Foto 1 -->
+      <div class="input-group mt-1">
+        <input
+          (change)="onFileSelected1($event)"
+          type="file"
+          class="form-control"
+          formControlName="foto1"
+        />
+        <label class="input-group-text" for="inputGroupFile02">Foto 1</label>
+      </div>
+      <!-- Foto 2 -->
+      <div class="input-group mb-3 mt-1">
+        <input
+          (change)="onFileSelected2($event)"
+          type="file"
+          class="form-control"
+          formControlName="foto2"
+        />
+        <label class="input-group-text" for="inputGroupFile02">Foto 2</label>
+      </div>
+      <!-- Boton -->
+      <button
+        [disabled]="!formPaciente.valid"
+        type="submit"
+        class="btn colorMain text-white w-100 mt-4 fw-semibold shadow-sm"
+      >
+        Sing Up
+      </button>
+    </form>
+    }
+    <!-- Form Especialista -->
+    @if(opcionAlta == "especialista"){
+    <form [formGroup]="formEspecialista" (ngSubmit)="onSubmitEspecialista()">
+      <!-- Correo electronico -->
+      <div class="input-group mt-4">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="mail"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Email"
+        />
+      </div>
+      <!-- Contraseña -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/password-icon.svg"
+            alt="password-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="password"
+          class="form-control bg-light"
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+      <!-- Nombre Y apellido -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="nombre"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Nombre"
+          required
+        />
+        <input
+          formControlName="apellido"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Apellido"
+          required
+        />
+      </div>
+      <!-- Edad Y Dni -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="edad"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Edad"
+          required
+        />
+
+        <input
+          formControlName="dni"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Dni"
+          required
+        />
+      </div>
+      <!-- Especialidad -->
+      <label class="form-label mt-1">Especialidad</label>
+      <select
+        formControlName="especialidad"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        @for (especialidad of arrayEspecialidades; track especialidad.id) {
+        <option value="{{ especialidad.nombre }}">
+          {{ especialidad.nombre }}
+        </option>
+        }
+      </select>
+      @if(this.formEspecialista.getRawValue().especialidad == 'Otro'){
+      <div class="input-group mt-1">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Agregar Especialidad"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+          formControlName="especialidadTexto"
+        />
+        <button
+          class="btn colorMain text-white fw-semibold shadow-sm"
+          type="button"
+          id="button-addon2"
+          (click)="agregarEspecialidad()"
+        >
+          Agregar
+        </button>
+      </div>
+      }
+      <!-- Foto 3 -->
+      <div class="input-group mt-3">
+        <input
+          (change)="onFileSelected3($event)"
+          type="file"
+          class="form-control"
+          formControlName="foto3"
+        />
+        <label class="input-group-text" for="inputGroupFile02">Foto 1</label>
+      </div>
+      <!-- Boton -->
+      <button
+        [disabled]="!formEspecialista.valid"
+        type="submit"
+        class="btn colorMain text-white w-100 mt-4 fw-semibold shadow-sm"
+      >
+        Sing Up
+      </button>
+    </form>
+    }
+
+    <div class="d-flex gap-1 justify-content-center mt-4">
+      <div>have an account?</div>
+      <a routerLink="/login" class="text-decoration-none text-info fw-semibold"
+        >Login</a
+      >
+    </div>
+  </div>
+</div>
