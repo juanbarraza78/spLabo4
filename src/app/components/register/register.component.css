@@ -4,6 +4,8 @@
 .min-100vh {
   min-height: 100vh;
   background-image: url("../../../assets/imgs/background-plant.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .colorMain {
   background-color: #009970;

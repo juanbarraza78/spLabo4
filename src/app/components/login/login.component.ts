@@ -23,6 +23,13 @@ export class LoginComponent {
   router = inject(Router);
   elementRef = inject(ElementRef);
 
+  imgUsuario1?: string;
+  imgUsuario2?: string;
+  imgUsuario3?: string;
+  imgUsuario4?: string;
+  imgUsuario5?: string;
+  imgUsuario6?: string;
+
   form = this.fb.nonNullable.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -59,16 +66,61 @@ export class LoginComponent {
       });
   }
 
+  ngOnInit(): void {
+    this.obtenerImgUsuario();
+  }
+
+  obtenerImgUsuario() {
+    this.authService.getUsuario('nafime2247@exeneli.com').then((r) => {
+      this.imgUsuario1 = r.imagenUno;
+    });
+    this.authService.getUsuario('geyopi6943@exeneli.com').then((r) => {
+      this.imgUsuario2 = r.imagenUno;
+    });
+    this.authService.getUsuario('lehav36586@gawte.com').then((r) => {
+      this.imgUsuario3 = r.imagenUno;
+    });
+    this.authService.getUsuario('wekifem262@luravell.com').then((r) => {
+      this.imgUsuario4 = r.imagenUno;
+    });
+    this.authService.getUsuario('nixaxed356@gawte.com').then((r) => {
+      this.imgUsuario5 = r.imagenUno;
+    });
+    this.authService.getUsuario('keniyaf458@lisoren.com').then((r) => {
+      this.imgUsuario6 = r.imagenUno;
+    });
+  }
+  // Especialistas
   userA() {
-    this.form.setValue({ email: 'kopop74796@idsho.com', password: 'asd123' });
+    this.form.setValue({ email: 'nafime2247@exeneli.com', password: '123123' });
   }
   userB() {
-    this.form.setValue({ email: 'palmiharze@gufum.com', password: 'asd123' });
+    this.form.setValue({ email: 'geyopi6943@exeneli.com', password: '123123' });
   }
+  // Pacientes
   userC() {
     this.form.setValue({
-      email: 'jeniffer93408@wlks.crankymonkey.info',
-      password: 'asd123',
+      email: 'lehav36586@gawte.com',
+      password: '123123',
+    });
+  }
+  userD() {
+    this.form.setValue({
+      email: 'wekifem262@luravell.com',
+      password: '123123',
+    });
+  }
+  userE() {
+    this.form.setValue({
+      email: 'nixaxed356@gawte.com',
+      password: '123123',
+    });
+  }
+  // Admin
+  userF() {
+    this.form.setValue({
+      email: 'keniyaf458@lisoren.com',
+      password: '123123',
     });
   }
 }

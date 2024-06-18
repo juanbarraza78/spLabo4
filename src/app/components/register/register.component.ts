@@ -1,5 +1,5 @@
 import { Component, ElementRef, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import {
   FormBuilder,
@@ -21,6 +21,7 @@ import { especialidadInterfaceID } from '../../interface/especialidad.interface'
 })
 export class RegisterComponent {
   authService = inject(FirebaseAuthService);
+  route = inject(ActivatedRoute);
   router = inject(Router);
   elementRef = inject(ElementRef);
   fb = inject(FormBuilder);
@@ -29,7 +30,7 @@ export class RegisterComponent {
 
   arrayEspecialidades?: especialidadInterfaceID[];
 
-  opcionAlta?: string = 'especialista';
+  opcionAlta?: string;
 
   selectedFile1: File | null = null;
   selectedFile2: File | null = null;
@@ -40,6 +41,15 @@ export class RegisterComponent {
     this.especialidadService.getEspecialidad().subscribe((data) => {
       this.arrayEspecialidades = data;
     });
+    this.obtenerRutaActual();
+  }
+
+  obtenerRutaActual(): void {
+    if (this.router.url == '/registerPacientes') {
+      this.opcionAlta = 'paciente';
+    } else if (this.router.url == '/registerEspecialistas') {
+      this.opcionAlta = 'especialista';
+    }
   }
 
   onFileSelected1(event: any) {

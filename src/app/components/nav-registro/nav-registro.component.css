@@ -1,25 +1,21 @@
 .min-100vh {
   min-height: 100vh;
   background-image: url("../../../assets/imgs/background-plant.png");
+  width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
 }
 .containerBackground {
-  margin-top: 180px;
+  margin-top: 0px;
 }
 .colorMain {
   background-color: #009970;
 }
 .btnDefault {
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 100%;
 }
 .containerBtn {
-  position: absolute;
-  right: 20px;
-  top: 50%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  transform: translate(0, -50%);
 }

@@ -1,0 +1,15 @@
+<div class="min-100vh">
+  <div class="container">
+    <ul data-bs-spy="scroll">
+      @for (usuario of usuarios; track usuario.id){
+      <li>
+        <div class="contenidoNombres">
+          <span class="name">{{ usuario.nombre }}</span>
+          <span class="name">{{ usuario.juego }}</span>
+        </div>
+        <div class="contenidoPuntaje"></div>
+      </li>
+      }
+    </ul>
+  </div>
+</div>
