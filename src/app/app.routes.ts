@@ -42,6 +42,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'solicitarTurno',
+    loadComponent: () =>
+      import('./components/solicitar-turno/solicitar-turno.component').then(
+        (m) => m.SolicitarTurnoComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

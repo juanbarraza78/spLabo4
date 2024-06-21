@@ -1,13 +1,36 @@
 <div class="min-100vh">
   <div class="container">
     <ul data-bs-spy="scroll">
-      @for (usuario of usuarios; track usuario.id){
+      <h2 class="h2 text-white">Especialistas</h2>
+      @for (usuario of usuariosEspecialistas; track usuario.id){
       <li>
-        <div class="contenidoNombres">
-          <span class="name">{{ usuario.nombre }}</span>
-          <span class="name">{{ usuario.juego }}</span>
-        </div>
-        <div class="contenidoPuntaje"></div>
+        <span>{{ usuario.nombre }}</span>
+        <span>{{ usuario.apellido }}</span>
+        <span>{{ usuario.edad }}</span>
+        <span>{{ usuario.dni }}</span>
+        <span>{{ usuario.especialidad }}</span>
+        <span>{{ usuario.mail }}</span>
+        <span>{{ usuario.estaValidado ? "Si" : "No" }}</span>
+        <img width="20px" [src]="usuario.imagenUno" alt="" />
+        <button
+          (click)="validarEspecialista(usuario)"
+          type="button"
+          class="btn btn-success"
+        >
+          {{ usuario.estaValidado ? "Remover" : "Validar" }}
+        </button>
+      </li>
+      }
+      <h2 class="h2 text-white">Pacientes</h2>
+      @for (usuario of usuariosPacientes; track usuario.id){
+      <li>
+        <span>{{ usuario.nombre }}</span>
+        <span>{{ usuario.apellido }}</span>
+        <span>{{ usuario.edad }}</span>
+        <span>{{ usuario.dni }}</span>
+        <span>{{ usuario.obraSocial }}</span>
+        <span>{{ usuario.mail }}</span>
+        <img width="20px" [src]="usuario.imagenUno" alt="" />
       </li>
       }
     </ul>

@@ -72,6 +72,16 @@
           placeholder="email"
         />
       </div>
+      @if(form.get('email'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      } }
       <div class="input-group mt-1">
         <div class="input-group-text colorMain">
           <img
@@ -87,7 +97,16 @@
           placeholder="Password"
         />
       </div>
-
+      @if(form.get('password'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <button
         [disabled]="!form.valid"
         type="submit"

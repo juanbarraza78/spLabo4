@@ -27,4 +27,28 @@ export class UsuariosComponent {
       );
     });
   }
+
+  validarEspecialista(especialista: any) {
+    let estaValidadoAux: boolean;
+    if (especialista.estaValidado) {
+      estaValidadoAux = false;
+    } else {
+      estaValidadoAux = true;
+    }
+    const auxEspecialista = {
+      nombre: especialista.nombre,
+      apellido: especialista.apellido,
+      edad: especialista.edad,
+      dni: especialista.dni,
+      especialidad: especialista.especialidad,
+      mail: especialista.mail,
+      imagenUno: especialista.imagenUno,
+      rol: especialista.rol,
+      estaValidado: estaValidadoAux,
+    };
+    this.authService.updateUsuarioEspecialista(
+      especialista.id,
+      auxEspecialista
+    );
+  }
 }

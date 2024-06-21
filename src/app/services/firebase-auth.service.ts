@@ -77,7 +77,7 @@ export class FirebaseAuthService {
       any[]
     >;
   }
-  async getUsuario(email: string): Promise<any> {
+  async getUsuario(email: string | undefined): Promise<any> {
     const q = query(this._collection, where('mail', '==', email));
     const usersSnapshot = await getDocs(q);
     if (!usersSnapshot.empty) {
@@ -89,7 +89,7 @@ export class FirebaseAuthService {
     }
   }
   updateUsuarioEspecialista(id: string, especialista: EspecialistaInterface) {
-    return updateDoc(this.document(id), { ...user });
+    return updateDoc(this.document(id), { ...especialista });
   }
   private document(id: string) {
     return doc(this._firestore, `${PATH}/${id}`);

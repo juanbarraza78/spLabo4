@@ -27,6 +27,16 @@
           placeholder="Email"
         />
       </div>
+      @if(formPaciente.get('mail'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Contraseña -->
       <div class="input-group mt-1">
         <div class="input-group-text colorMain">
@@ -43,6 +53,16 @@
           placeholder="Password"
         />
       </div>
+      @if(formPaciente.get('password'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Nombre Y apellido -->
       <div class="input-group mt-1">
         <div class="input-group-text colorMain">
@@ -67,6 +87,25 @@
           required
         />
       </div>
+      @if(formPaciente.get('apellido'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formPaciente.get('nombre'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Edad Y Dni -->
       <div class="input-group mt-1">
         <div class="input-group-text colorMain">
@@ -92,6 +131,25 @@
           required
         />
       </div>
+      @if(formPaciente.get('edad'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formPaciente.get('dni'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Obra Social -->
       <div class="input-group mt-1">
         <div class="input-group-text colorMain">
@@ -108,6 +166,16 @@
           placeholder="Obra Social"
         />
       </div>
+      @if(formPaciente.get('obraSocial'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Foto 1 -->
       <div class="input-group mt-1">
         <input
@@ -118,6 +186,16 @@
         />
         <label class="input-group-text" for="inputGroupFile02">Foto 1</label>
       </div>
+      @if(formPaciente.get('foto1'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Foto 2 -->
       <div class="input-group mb-3 mt-1">
         <input
@@ -128,6 +206,16 @@
         />
         <label class="input-group-text" for="inputGroupFile02">Foto 2</label>
       </div>
+      @if(formPaciente.get('foto2'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Boton -->
       <button
         [disabled]="!formPaciente.valid"
@@ -157,6 +245,16 @@
           placeholder="Email"
         />
       </div>
+      @if(formEspecialista.get('mail'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Contraseña -->
       <div class="input-group mt-1">
         <div class="input-group-text colorMain">
@@ -173,6 +271,16 @@
           placeholder="Password"
         />
       </div>
+      @if(formEspecialista.get('password'); as aux){ @if(aux.invalid &&
+      (aux.dirty || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Nombre Y apellido -->
       <div class="input-group mt-1">
         <div class="input-group-text colorMain">
@@ -197,6 +305,25 @@
           required
         />
       </div>
+      @if(formEspecialista.get('nombre'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formEspecialista.get('apellido'); as aux){ @if(aux.invalid &&
+      (aux.dirty || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Edad Y Dni -->
       <div class="input-group mt-1">
         <div class="input-group-text colorMain">
@@ -222,6 +349,25 @@
           required
         />
       </div>
+      @if(formEspecialista.get('edad'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formEspecialista.get('dni'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Especialidad -->
       <label class="form-label mt-1">Especialidad</label>
       <select
@@ -265,6 +411,16 @@
         />
         <label class="input-group-text" for="inputGroupFile02">Foto 1</label>
       </div>
+      @if(formEspecialista.get('foto3'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
       <!-- Boton -->
       <button
         [disabled]="!formEspecialista.valid"

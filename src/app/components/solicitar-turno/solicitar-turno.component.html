@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center min-100vh">
+  <h1></h1>
+  <div
+    class="bg-white p-5 rounded-5 text-secondary shadow containerBackground"
+    style="width: 90%"
+  >
+    <!-- Especialidad -->
+    <form [formGroup]="form">
+      <label class="form-label mt-1">Especialidad</label>
+      <select
+        (change)="changeEspecialidad($event)"
+        formControlName="especialidad"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="Todos">Todos</option>
+        @for (especialidad of arrayEspecialidades; track especialidad.id) {
+        @if(especialidad.nombre != 'Otro'){
+        <option value="{{ especialidad.nombre }}">
+          {{ especialidad.nombre }}
+        </option>
+        } }
+      </select>
+    </form>
+    <!-- Lista Especialistas -->
+    <h2>Especialistas</h2>
+    <ul data-bs-spy="scroll">
+      @for (usuario of usuariosEspecialistasFiltrado; track usuario.id){
+      <li>
+        <span>{{ usuario.nombre }}</span>
+        <span>{{ usuario.apellido }}</span>
+        <span>{{ usuario.edad }}</span>
+        <span>{{ usuario.dni }}</span>
+        <span>{{ usuario.especialidad }}</span>
+        <span>{{ usuario.mail }}</span>
+        <span>{{ usuario.estaValidado ? "Si" : "No" }}</span>
+        <img width="20px" [src]="usuario.imagenUno" alt="" />
+        <button
+          (click)="clickEspecialista(usuario)"
+          type="button"
+          class="btn btn-success"
+        >
+          Ver Horarios
+        </button>
+      </li>
+      }
+    </ul>
+    <!-- Lista Usuarios -->
+    @if(rolUsuarioActual == "admin"){
+    <h2>Usuarios</h2>
+    <ul data-bs-spy="scroll">
+      @for (usuario of usuariosPacientes; track usuario.id){
+      <li>
+        <span>{{ usuario.nombre }}</span>
+        <span>{{ usuario.apellido }}</span>
+        <span>{{ usuario.edad }}</span>
+        <span>{{ usuario.dni }}</span>
+        <span>{{ usuario.obraSocial }}</span>
+        <span>{{ usuario.mail }}</span>
+        <img width="20px" [src]="usuario.imagenUno" alt="" />
+        <button
+          type="button"
+          (click)="clickPaciente(usuario)"
+          class="btn btn-success"
+        >
+          {{ pacienteElegido == usuario.mail ? "Seleccionado" : "Seleccionar" }}
+        </button>
+      </li>
+      }
+    </ul>
+    }
+    <!-- Lista Turnos (select)-->
+    <div class="turnos">
+      <label class="form-label mt-1">Turnos Disponibles</label>
+      @if(especialistaElegido){
+      <select
+        id="day-select"
+        class="form-select"
+        aria-label="Default select example"
+        (change)="onDayChange($event)"
+      >
+        <option *ngFor="let day of futureDays" [value]="day.date">
+          {{ day.date }} - {{ day.day }}
+        </option>
+      </select>
+      <!-- Selecciona Dia (Botones)-->
+      @if(selectedDay){
+      <div class="mt-1 mb-1">
+        @for (button of selectedDay.buttons; track $index) {
+        <button
+          class="btn btn-success m-1"
+          [ngClass]="{ 'btn-info': button.selected }"
+          (click)="onButtonClick(selectedDay.date, button.time)"
+        >
+          {{ button.time }}
+        </button>
+        }
+      </div>
+      } }
+    </div>
+    <!-- Boton resevar -->
+    <button class="btn btn-success m-1" (click)="reservar()">
+      Reservar Turno
+    </button>
+  </div>
+</div>

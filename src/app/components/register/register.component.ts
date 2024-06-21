@@ -68,13 +68,13 @@ export class RegisterComponent {
   formPaciente = this.fb.nonNullable.group({
     nombre: ['', Validators.required],
     apellido: ['', Validators.required],
-    edad: ['', Validators.required],
-    dni: ['', Validators.required],
+    edad: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+    dni: ['', [Validators.required, Validators.maxLength(8)]],
     obraSocial: ['', Validators.required],
     mail: ['', Validators.required],
     foto1: ['', Validators.required],
     foto2: ['', Validators.required],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
   async onSubmitPaciente() {
     if (this.formPaciente.valid && this.selectedFile1 && this.selectedFile2) {
@@ -108,12 +108,12 @@ export class RegisterComponent {
   formEspecialista = this.fb.nonNullable.group({
     nombre: ['', Validators.required],
     apellido: ['', Validators.required],
-    edad: ['', Validators.required],
-    dni: ['', Validators.required],
+    edad: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+    dni: ['', [Validators.required, Validators.minLength(2)]],
     especialidad: ['', Validators.required],
     mail: ['', Validators.required],
     foto3: ['', Validators.required],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     especialidadTexto: [''],
   });
   async onSubmitEspecialista() {
