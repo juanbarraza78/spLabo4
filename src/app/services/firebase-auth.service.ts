@@ -77,7 +77,7 @@ export class FirebaseAuthService {
       any[]
     >;
   }
-  async getUsuario(email: string | undefined): Promise<any> {
+  async getUsuario(email: string | undefined | null): Promise<any> {
     const q = query(this._collection, where('mail', '==', email));
     const usersSnapshot = await getDocs(q);
     if (!usersSnapshot.empty) {
@@ -88,6 +88,24 @@ export class FirebaseAuthService {
       return null;
     }
   }
+
+  async getUsuarioId(email: string | undefined | null): Promise<any> {
+    const q = query(this._collection, where('mail', '==', email));
+    const usersSnapshot = await getDocs(q);
+    if (!usersSnapshot.empty) {
+      const userDoc = usersSnapshot.docs[0];
+      const userData = userDoc.data();
+      return (
+        {
+          id: userDoc.id,
+          ...userData,
+        } || null
+      );
+    } else {
+      return null;
+    }
+  }
+
   updateUsuarioEspecialista(id: string, especialista: EspecialistaInterface) {
     return updateDoc(this.document(id), { ...especialista });
   }
@@ -160,6 +178,10 @@ export class FirebaseAuthService {
           imagenUno: resultado,
           estaValidado: false,
           rol: 'especialista',
+          deSemana: 8,
+          hastaSemana: 19,
+          deSabado: 8,
+          hastaSabado: 14,
         };
         await addDoc(this._collection, data).then(() => {
           retorno = true;

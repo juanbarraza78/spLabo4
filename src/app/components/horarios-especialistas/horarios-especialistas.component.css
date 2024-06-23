@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+.containerBackground {
+  margin-top: 180px;
+}
+
+.min-100vh {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("../../../assets/imgs/background-plant.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  /* centrar container */
+  display: flex;
+  justify-content: center;
+}
+ul {
+  border-radius: 10px;
+  /* height: 650px; */
+  box-sizing: border-box;
+  padding: 20px;
+  /* background: #009970; */
+  overflow: scroll;
+}
+ul::-webkit-scrollbar {
+  scrollbar-width: none;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  background: #00997093;
+  padding: 10px 20px;
+  color: #fff;
+  margin: 5px 0;
+  transition: 0.5s;
+}
+
+.imgPerfil {
+  width: 20px;
+  height: 20px;
+}

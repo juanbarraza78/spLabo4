@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-center min-100vh">
+  <div class="bg-white p-5 rounded-5 text-secondary shadow containerBackground">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2>Horarios de la semana</h2>
+      <h3>Desde:</h3>
+      <select
+        formControlName="deSemana"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="8">8:00</option>
+        <option value="9">9:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+      </select>
+      <h3>Hasta:</h3>
+      <select
+        formControlName="hastaSemana"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="8">8:00</option>
+        <option value="9">9:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+      </select>
+      <h2 class="h2 mt-5">Horarios del sabado:</h2>
+      <h3>Desde:</h3>
+      <select
+        formControlName="deSabado"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="8">8:00</option>
+        <option value="9">9:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+      </select>
+      <h3>Hasta:</h3>
+      <select
+        formControlName="hastaSabado"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="8">8:00</option>
+        <option value="9">9:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+      </select>
+      <button type="submit" class="btn btn-success text-white mt-4">
+        Confirmar Horarios
+      </button>
+    </form>
+  </div>
+</div>

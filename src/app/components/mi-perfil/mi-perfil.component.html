@@ -1,0 +1,47 @@
+<div class="about-wrapper">
+  <div class="about-left">
+    <div class="about-left-content">
+      <div>
+        <div class="shadow">
+          <div class="about-img">
+            <img [src]="usuarioActual?.imagenUno" alt="about image" />
+          </div>
+        </div>
+
+        <!-- <h2>{{ usuarioActual?.nombre }}<br />{{ usuarioActual?.apellido }}</h2> -->
+        <!-- <h3>Documento: {{ usuarioActual?.dni }}</h3> -->
+      </div>
+
+      <ul class="icons"></ul>
+    </div>
+  </div>
+
+  <div class="about-right">
+    <h1>{{ usuarioActual?.nombre }}</h1>
+    <h1>{{ usuarioActual?.apellido }}</h1>
+    <h2>Datos Personales:</h2>
+    <div class="about-para">
+      <p>
+        @if(usuarioActual?.rol == "especialista" ){
+        <span>Especialidad</span> {{ usuarioActual?.especialidad }} <br />
+        } @if(usuarioActual?.rol == "paciente" ){
+        <span>Obra social</span> {{ usuarioActual?.obraSocial }} <br />
+        }
+        <span>Numero de Documento</span> {{ usuarioActual?.dni }}<br />
+        <span>Correo Electronico</span> {{ usuarioActual?.mail }} <br />
+      </p>
+      @if(usuarioActual?.rol == "especialista" ){
+      <button
+        routerLink="/horariosEspecialistas"
+        class="btn btn-success text-white mt-4"
+      >
+        Ver Horarios
+      </button>
+      } @if(usuarioActual?.rol == "paciente" ){
+      <button routerLink="/misTurnos" class="btn btn-success text-white mt-4">
+        Ver Turnos
+      </button>
+      }
+    </div>
+  </div>
+</div>

@@ -50,6 +50,7 @@ export class SolicitarTurnoComponent {
   especialidadElegida?: string;
   turnosElegidos: any[] = [];
   pacienteElegido?: string;
+  rolUsuarioActual: string = '';
 
   filtrarTurnosPorEspecialista(mailEspecialista: string | undefined) {
     if (mailEspecialista) {
@@ -60,9 +61,6 @@ export class SolicitarTurnoComponent {
       console.log('no existe especialista');
     }
   }
-
-  rolUsuarioActual: string = '';
-
   ngOnInit() {
     this.especialidadService.getEspecialidad().subscribe((data) => {
       this.arrayEspecialidades = data;
@@ -82,8 +80,6 @@ export class SolicitarTurnoComponent {
       this.rolUsuario().then((r) => (this.rolUsuarioActual = r));
     }, 1000);
   }
-
-  // Form
   form = this.fb.nonNullable.group({
     especialidad: ['', Validators.required],
   });
@@ -98,7 +94,6 @@ export class SolicitarTurnoComponent {
       );
     }
   }
-
   async rolUsuario() {
     let respuesta = null;
     if (this.authService.currentUserSig()?.email) {
@@ -109,19 +104,18 @@ export class SolicitarTurnoComponent {
     }
     return respuesta;
   }
-
   clickEspecialista(usuario: any) {
     this.especialistaElegido = usuario.mail;
     this.especialidadElegida = usuario.especialidad;
     this.filtrarTurnosPorEspecialista(this.especialistaElegido);
-    this.calculateFutureDays();
+    this.calculateFutureDays(usuario);
     console.log(usuario);
   }
   clickPaciente(usuario: any) {
     this.pacienteElegido = usuario.mail;
   }
   // Botones
-  calculateFutureDays(): void {
+  calculateFutureDays(usuario: any): void {
     this.futureDays = [];
     const daysOfWeek = [
       'Domingo',
@@ -139,7 +133,7 @@ export class SolicitarTurnoComponent {
       futureDate.setDate(today.getDate() + i);
       const dayOfWeek = daysOfWeek[futureDate.getDay()];
 
-      const buttons = this.generateButtons(futureDate);
+      const buttons = this.generateButtons(futureDate, usuario);
 
       this.futureDays.push({
         date: this.formatDate(futureDate),
@@ -148,19 +142,22 @@ export class SolicitarTurnoComponent {
       });
     }
   }
-  generateButtons(date: Date): { time: string; selected: boolean }[] {
+  generateButtons(
+    date: Date,
+    usuario: any
+  ): { time: string; selected: boolean }[] {
     const buttons: { time: string; selected: boolean }[] = [];
     let startHour, endHour;
     const dayOfWeek = date.getDay();
 
     if (dayOfWeek >= 1 && dayOfWeek <= 5) {
       // Lunes a Viernes
-      startHour = 8;
-      endHour = 19;
+      startHour = usuario.deSemana;
+      endHour = usuario.hastaSemana;
     } else if (dayOfWeek === 6) {
       // Sábado
-      startHour = 8;
-      endHour = 14;
+      startHour = usuario.deSabado;
+      endHour = usuario.hastaSabado;
     } else {
       // Domingo
       return buttons;
@@ -250,7 +247,6 @@ export class SolicitarTurnoComponent {
     }
     return false;
   }
-
   reservar() {
     if (this.especialistaElegido && this.especialidadElegida) {
       if (this.turnosElegidos.length == 0) {
@@ -265,6 +261,10 @@ export class SolicitarTurnoComponent {
                 paciente: this.pacienteElegido,
                 especialista: this.especialistaElegido,
                 especialidad: this.especialidadElegida,
+                estado: 'pendiente',
+                encuestaPaciente: '',
+                comentarioPaciente: '',
+                comentarioEspecialista: '',
               };
               this.turnosService
                 .saveTurno(turnoAux)
@@ -284,6 +284,10 @@ export class SolicitarTurnoComponent {
               paciente: this.authService.currentUserSig()?.email,
               especialista: this.especialistaElegido,
               especialidad: this.especialidadElegida,
+              estado: 'pendiente',
+              encuestaPaciente: '',
+              comentarioPaciente: '',
+              comentarioEspecialista: '',
             };
             this.turnosService
               .saveTurno(turnoAux)

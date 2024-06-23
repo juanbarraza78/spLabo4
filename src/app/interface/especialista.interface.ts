@@ -11,5 +11,9 @@ export interface EspecialistaInterface {
   imagenUno: string;
   rol: string;
   estaValidado: boolean;
+  deSemana: number;
+  hastaSemana: number;
+  deSabado: number;
+  hastaSabado: number;
   // password: string;
 }

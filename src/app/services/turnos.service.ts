@@ -47,7 +47,7 @@ export class TurnosService {
   }
   updateTurno(id: string, turno: turnoInterface) {
     const documet = doc(this._collection, id);
-    updateDoc(documet, { ...turno });
+    return updateDoc(documet, { ...turno });
   }
   deleteTurno(id: string) {
     const documet = doc(this._collection, id);

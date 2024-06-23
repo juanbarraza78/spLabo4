@@ -8,11 +8,12 @@ import {
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, RecaptchaModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -34,6 +35,10 @@ export class LoginComponent {
     email: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
+
+  executeRecaptcha(token: any) {
+    console.log(token);
+  }
 
   onSubmit(): void {
     const value = this.form.getRawValue();

@@ -7,4 +7,8 @@ export interface turnoInterface {
   paciente: string | undefined;
   especialista: string | undefined;
   especialidad: string | undefined;
+  estado: string;
+  encuestaPaciente: string;
+  comentarioPaciente: string;
+  comentarioEspecialista: string;
 }

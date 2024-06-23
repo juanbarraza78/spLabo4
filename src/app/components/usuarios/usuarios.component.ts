@@ -45,6 +45,10 @@ export class UsuariosComponent {
       imagenUno: especialista.imagenUno,
       rol: especialista.rol,
       estaValidado: estaValidadoAux,
+      deSemana: especialista.deSemana,
+      hastaSemana: especialista.hastaSemana,
+      deSabado: especialista.deSabado,
+      hastaSabado: especialista.hastaSabado,
     };
     this.authService.updateUsuarioEspecialista(
       especialista.id,

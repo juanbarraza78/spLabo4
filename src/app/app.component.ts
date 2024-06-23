@@ -16,14 +16,17 @@ export class AppComponent {
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
       if (user) {
-        this.authService.currentUserSig.set({
-          email: user.email!,
+        this.authService.getUsuario(user.email).then((r) => {
+          this.authService.currentUserSig.set({
+            email: user.email!,
+            rol: r.rol,
+          });
+          console.log(this.authService.currentUserSig());
         });
       } else {
         this.authService.currentUserSig.set(null);
+        console.log(this.authService.currentUserSig());
       }
-      // Controla el usuario actual
-      console.log(this.authService.currentUserSig());
     });
   }
 }

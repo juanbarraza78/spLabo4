@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+  <div class="bg-white p-5 rounded-5 text-secondary shadow containerBackground">
+    <h1>Turnos</h1>
+    @if(authService.currentUserSig()?.rol == 'admin'){
+    <!-- Input Buscar -->
+    <div class="input-group mb-3 mt-3">
+      <input
+        [(ngModel)]="buscarString"
+        type="text"
+        class="form-control"
+        placeholder="Buscar por Especialista o Especialidad"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+      />
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="button-addon2"
+        (click)="buscar()"
+      >
+        Buscar
+      </button>
+    </div>
+    <!-- Lista Turnos Pacientes -->
+    <div class="row">
+      @for (turno of listaTurnosPacientesFiltrado; track turno.id){
+      <div class="col-md-6 col-sm-12 mt-3">
+        <div class="card" style="width: 100%">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Estado: {{ turno.estado }}</li>
+            <li class="list-group-item">Fecha: {{ turno.date }}</li>
+            <li class="list-group-item">Horario: {{ turno.time }}</li>
+            <li class="list-group-item">Paciente: {{ turno.paciente }}</li>
+            <li class="list-group-item">
+              Especialista: {{ turno.especialista }}
+            </li>
+            <li class="list-group-item">
+              Especialidad: {{ turno.especialidad }}
+            </li>
+          </ul>
+          <div class="card-footer d-flex justify-content-center">
+            <div class="row">
+              @if(authService.currentUserSig()?.rol == 'admin' && turno.estado
+              == "pendiente"){
+              <div class="col">
+                <a
+                  (click)="adminCancelarTurno(turno)"
+                  class="btn btn-success m-1"
+                  >Cancelar Turno</a
+                >
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>
