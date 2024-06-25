@@ -4,49 +4,45 @@
     style="width: 90%"
   >
     <!-- Especialidad -->
-    <form [formGroup]="form">
-      <label class="form-label mt-1">Especialidad</label>
-      <select
-        (change)="changeEspecialidad($event)"
-        formControlName="especialidad"
-        class="form-select"
-        aria-label="Default select example"
-      >
-        <option value="Todos">Todos</option>
-        @for (especialidad of arrayEspecialidades; track especialidad.id) {
-        @if(especialidad.nombre != 'Otro'){
-        <option value="{{ especialidad.nombre }}">
-          {{ especialidad.nombre }}
-        </option>
-        } }
-      </select>
-    </form>
-    <!-- Lista Especialistas -->
-    <h2>Especialistas</h2>
-    <ul data-bs-spy="scroll">
-      @for (usuario of usuariosEspecialistasFiltrado; track usuario.id){
-      <li>
-        <span>{{ usuario.nombre }}</span>
-        <span>{{ usuario.apellido }}</span>
-        <span>{{ usuario.edad }}</span>
-        <span>{{ usuario.dni }}</span>
-        <span>{{ usuario.especialidad }}</span>
-        <span>{{ usuario.mail }}</span>
-        <span>{{ usuario.estaValidado ? "Si" : "No" }}</span>
-        <img width="20px" [src]="usuario.imagenUno" alt="" />
+    <h2 class="h2 mb-4">Especialidades</h2>
+    <div class="row">
+      @for (especialidad of arrayEspecialidades; track $index) {
+      @if(especialidad.nombre != 'Otro'){
+      <div class="col">
         <button
-          (click)="clickEspecialista(usuario)"
-          type="button"
-          class="btn btn-success"
+          class="btn btn-success m-1 boton"
+          (click)="clickEspecialidad(especialidad.nombre)"
         >
-          Ver Horarios
+          <img [src]="especialidad.img" alt="" width="80px" height="80px" />
         </button>
-      </li>
+      </div>
+      } }
+    </div>
+    <!-- Lista Especialistas -->
+    @if(especialidadString){
+    <h2 class="h2 mb-4">Especialistas</h2>
+    <div class="row">
+      @for (usuario of usuariosEspecialistasFiltrado; track $index) {
+      <div class="col">
+        <div class="contenedorEspecialistas">
+          <button
+            class="btn btn-success m-1 boton"
+            (click)="clickEspecialista(usuario)"
+          >
+            <img [src]="usuario.imagenUno" alt="" width="80px" height="80px" />
+          </button>
+          <span class="h4 nombreEspecialista"
+            >{{ usuario.nombre }} {{ usuario.apellido }}</span
+          >
+        </div>
+      </div>
       }
-    </ul>
+    </div>
+    }
     <!-- Lista Usuarios -->
-    @if(rolUsuarioActual == "admin"){
-    <h2>Usuarios</h2>
+    @if(this.authService.currentUserSig()?.rol == "admin" &&
+    especialidadString){
+    <h2 class="h2 mb-4">Usuarios</h2>
     <ul data-bs-spy="scroll">
       @for (usuario of usuariosPacientes; track usuario.id){
       <li>
@@ -69,19 +65,14 @@
     </ul>
     }
     <!-- Lista Turnos (select)-->
+    @if(especialistaElegido){
     <div class="turnos">
-      <label class="form-label mt-1">Turnos Disponibles</label>
-      @if(especialistaElegido){
-      <select
-        id="day-select"
-        class="form-select"
-        aria-label="Default select example"
-        (change)="onDayChange($event)"
-      >
-        <option *ngFor="let day of futureDays" [value]="day.date">
-          {{ day.date }} - {{ day.day }}
-        </option>
-      </select>
+      <h2 class="h2 mb-4">Turnos Disponibles</h2>
+      @if(especialistaElegido){ @for (day of futureDays; track $index) {
+      <button (click)="onDayClick(day.date)" class="btn btn-success m-1">
+        {{ day.date }}
+      </button>
+      }
       <!-- Selecciona Dia (Botones)-->
       @if(selectedDay){
       <div class="mt-1 mb-1">
@@ -91,12 +82,14 @@
           [ngClass]="{ 'btn-info': button.selected }"
           (click)="onButtonClick(selectedDay.date, button.time)"
         >
-          {{ button.time }}
+          {{ button.time | timeFormat }}
         </button>
         }
       </div>
       } }
     </div>
+    }
+
     <!-- Boton resevar -->
     <button class="btn btn-success m-1" (click)="reservar()">
       Reservar Turno

@@ -42,3 +42,17 @@ ul li {
   width: 20px;
   height: 20px;
 }
+
+.boton {
+  border-radius: 100%;
+  padding: 20px;
+}
+
+.contenedorEspecialistas {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

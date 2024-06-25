@@ -12,11 +12,13 @@ import {
 } from '../../interface/turno.interface';
 import { TurnosService } from '../../services/turnos.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { TimeFormatPipe } from '../../pipes/time-format.pipe';
 
 @Component({
   selector: 'app-solicitar-turno',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TimeFormatPipe],
   templateUrl: './solicitar-turno.component.html',
   styleUrl: './solicitar-turno.component.css',
 })
@@ -26,6 +28,7 @@ export class SolicitarTurnoComponent {
   authService = inject(FirebaseAuthService);
   turnosService = inject(TurnosService);
   toastAlert = inject(ToastrService);
+  router = inject(Router);
 
   futureDays: {
     date: string;
@@ -50,7 +53,7 @@ export class SolicitarTurnoComponent {
   especialidadElegida?: string;
   turnosElegidos: any[] = [];
   pacienteElegido?: string;
-  rolUsuarioActual: string = '';
+  especialidadString?: string;
 
   filtrarTurnosPorEspecialista(mailEspecialista: string | undefined) {
     if (mailEspecialista) {
@@ -76,33 +79,16 @@ export class SolicitarTurnoComponent {
     this.turnosService.getTurnos().subscribe((data) => {
       this.turnos = data;
     });
-    setTimeout(() => {
-      this.rolUsuario().then((r) => (this.rolUsuarioActual = r));
-    }, 1000);
   }
-  form = this.fb.nonNullable.group({
-    especialidad: ['', Validators.required],
-  });
-  changeEspecialidad(event: Event) {
-    const selectedDate = (event.target as HTMLSelectElement).value;
-    if (selectedDate == 'Todos') {
+  clickEspecialidad(nombreEspecialidad: string) {
+    this.especialidadString = nombreEspecialidad;
+    if (nombreEspecialidad == 'Todos') {
       this.usuariosEspecialistasFiltrado = this.usuariosEspecialistas;
     } else {
       this.usuariosEspecialistasFiltrado = this.usuariosEspecialistas.filter(
-        (usuario) =>
-          usuario.especialidad === this.form.getRawValue().especialidad
+        (usuario) => usuario.especialidad === nombreEspecialidad
       );
     }
-  }
-  async rolUsuario() {
-    let respuesta = null;
-    if (this.authService.currentUserSig()?.email) {
-      respuesta = await this.authService.getUsuario(
-        this.authService.currentUserSig()?.email
-      );
-      respuesta = respuesta.rol;
-    }
-    return respuesta;
   }
   clickEspecialista(usuario: any) {
     this.especialistaElegido = usuario.mail;
@@ -227,10 +213,8 @@ export class SolicitarTurnoComponent {
 
     console.log(this.turnosElegidos);
   }
-  onDayChange(event: Event): void {
-    const selectedDate = (event.target as HTMLSelectElement).value;
-    this.selectedDay =
-      this.futureDays.find((day) => day.date === selectedDate) || null;
+  onDayClick(dayA: any): void {
+    this.selectedDay = this.futureDays.find((day) => day.date === dayA) || null;
     this.resetButtons();
   }
   resetButtons(): void {
@@ -249,11 +233,16 @@ export class SolicitarTurnoComponent {
   }
   reservar() {
     if (this.especialistaElegido && this.especialidadElegida) {
+      console.log(this.especialistaElegido);
+      console.log(this.especialidadElegida);
       if (this.turnosElegidos.length == 0) {
+        console.log('No hay ningun turno');
         this.toastAlert.error('No hay ningun turno', 'Error');
       } else {
         this.turnosElegidos.forEach((btn) => {
-          if (this.rolUsuarioActual == 'admin') {
+          console.log('turno');
+          if (this.authService.currentUserSig()?.rol == 'admin') {
+            console.log('admin');
             if (this.pacienteElegido) {
               const turnoAux: turnoInterface = {
                 date: btn.date,
@@ -270,14 +259,18 @@ export class SolicitarTurnoComponent {
                 .saveTurno(turnoAux)
                 .then(() => {
                   this.toastAlert.success('Reservacion completada', 'Exito');
+                  console.log('Reservacion completada');
                 })
                 .catch(() => {
                   this.toastAlert.error('Error al crear un Turno', 'Error');
+                  console.log('Error al crear un Turno');
                 });
             } else {
               this.toastAlert.error('Falta elegir paciente', 'Error');
+              console.log('Falta elegir paciente');
             }
-          } else if (this.rolUsuarioActual == 'paciente') {
+          } else if (this.authService.currentUserSig()?.rol == 'paciente') {
+            console.log('paciente');
             const turnoAux: turnoInterface = {
               date: btn.date,
               time: btn.time,
@@ -293,10 +286,14 @@ export class SolicitarTurnoComponent {
               .saveTurno(turnoAux)
               .then(() => {
                 this.toastAlert.success('Reservacion completada', 'Exito');
+                console.log('Reservacion completada');
               })
               .catch(() => {
                 this.toastAlert.error('Error al crear un Turno', 'Error');
+                console.log('error al crear un Turno');
               });
+          } else {
+            console.log('no hay rol');
           }
         });
       }

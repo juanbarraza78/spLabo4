@@ -49,6 +49,8 @@ export class RegisterComponent {
       this.opcionAlta = 'paciente';
     } else if (this.router.url == '/registerEspecialistas') {
       this.opcionAlta = 'especialista';
+    } else if (this.router.url == '/registerAdmin') {
+      this.opcionAlta = 'admin';
     }
   }
 
@@ -83,6 +85,12 @@ export class RegisterComponent {
         .register(value.mail, value.password)
         .then(async () => {
           if (this.selectedFile1 && this.selectedFile2) {
+            if (this.authService.currentUserSig()?.rol == 'admin') {
+              this.authService.login(
+                this.authService.mailActual,
+                this.authService.passActual
+              );
+            }
             let respuesta = await this.authService.createUsuarioPaciente(
               value,
               this.selectedFile1,
@@ -123,10 +131,58 @@ export class RegisterComponent {
         .register(value.mail, value.password)
         .then(async () => {
           if (this.selectedFile3) {
+            if (this.authService.currentUserSig()?.rol == 'admin') {
+              this.authService.login(
+                this.authService.mailActual,
+                this.authService.passActual
+              );
+            }
             let respuesta = await this.authService.createUsuarioEspecialista(
               value,
               this.selectedFile3,
               value.especialidad
+            );
+            if (respuesta) {
+              this.router.navigateByUrl('/login');
+              this.toastAlert.success('Email creado correctamente', 'Aceptado');
+            } else {
+              this.toastAlert.error(
+                'Email creando alta o agregando imagen',
+                'Error'
+              );
+            }
+          }
+        })
+        .catch(() => {
+          this.toastAlert.error('Error al registrar', 'Error');
+        });
+    }
+  }
+
+  formAdmin = this.fb.nonNullable.group({
+    nombre: ['', Validators.required],
+    apellido: ['', Validators.required],
+    edad: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+    dni: ['', [Validators.required, Validators.maxLength(8)]],
+    mail: ['', Validators.required],
+    foto1: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
+  async onSubmitAdmin() {
+    if (this.formAdmin.valid && this.selectedFile4) {
+      const value = this.formAdmin.getRawValue();
+      this.authService
+        .register(value.mail, value.password)
+        .then(async () => {
+          if (this.selectedFile4) {
+            //re log
+            this.authService.login(
+              this.authService.mailActual,
+              this.authService.passActual
+            );
+            let respuesta = await this.authService.createUsuarioAdmin(
+              value,
+              this.selectedFile4
             );
             if (respuesta) {
               this.router.navigateByUrl('/login');
@@ -151,6 +207,7 @@ export class RegisterComponent {
     if (especialidadAgregar) {
       this.especialidadService.createEspecialidad({
         nombre: especialidadAgregar,
+        img: 'https://clinicasinnovaciondental.com/wp-content/uploads/2023/09/medicina-general.jpg',
       });
     }
   }

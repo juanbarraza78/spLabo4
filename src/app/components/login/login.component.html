@@ -107,9 +107,11 @@
         {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
       </div>
       }}
+      <!-- Captcha -->
       <re-captcha
+        class="mt-4"
         (resolved)="executeRecaptcha($event)"
-        siteKey="6Lddjf8pAAAAALNPZmyrmed3CYVfRq0J1xDZdNbp"
+        siteKey="6LctqQAqAAAAADp7VONDZxMko5U_kWG8CzD01t_e"
       ></re-captcha>
       <button
         [disabled]="!form.valid"

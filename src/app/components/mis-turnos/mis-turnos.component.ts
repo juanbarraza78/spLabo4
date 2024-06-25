@@ -8,6 +8,8 @@ import {
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { HistorialClinicaService } from '../../services/historial-clinica.service';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -19,7 +21,9 @@ import { ToastrService } from 'ngx-toastr';
 export class MisTurnosComponent {
   authService = inject(FirebaseAuthService);
   turnosService = inject(TurnosService);
+  historialService = inject(HistorialClinicaService);
   toastAlert = inject(ToastrService);
+  router = inject(Router);
 
   listaTurnosPacientes: turnoInterfaceID[] = [];
   listaTurnosPacientesFiltrado: turnoInterfaceID[] = [];
@@ -47,22 +51,32 @@ export class MisTurnosComponent {
       }
     }, 2500);
   }
-  buscar() {
+  async buscar() {
     const term = this.buscarString.toLowerCase();
-    if (this.authService.currentUserSig()?.rol == 'paciente') {
+    if (
+      this.authService.currentUserSig()?.rol == 'paciente' ||
+      this.authService.currentUserSig()?.rol == 'especialista'
+    ) {
+      // Poner filtro del historial
       this.listaTurnosPacientesFiltrado = this.listaTurnosPacientes.filter(
-        (turno) =>
-          turno.especialidad?.toLowerCase().includes(term) ||
-          turno.especialista?.toLowerCase().includes(term)
-      );
-    } else if (this.authService.currentUserSig()?.rol == 'especialista') {
-      this.listaTurnosPacientesFiltrado = this.listaTurnosPacientes.filter(
-        (turno) =>
-          turno.especialidad?.toLowerCase().includes(term) ||
-          turno.paciente?.toLowerCase().includes(term)
+        (turno) => {
+          if (
+            turno.especialidad?.toLowerCase().includes(term) ||
+            turno.especialista?.toLowerCase().includes(term) ||
+            turno.date?.toLowerCase().includes(term) ||
+            turno.estado?.toLowerCase().includes(term) ||
+            turno.time?.toLowerCase().includes(term) ||
+            turno.paciente?.toLowerCase().includes(term)
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        }
       );
     }
   }
+
   // Botones
   pacienteCancelarTurno(turno: turnoInterfaceID) {
     Swal.fire({
@@ -212,6 +226,10 @@ export class MisTurnosComponent {
     });
   }
   especialistaFinalizarTurno(turno: turnoInterfaceID) {
+    if (turno.paciente != undefined && turno.especialista != undefined) {
+      this.historialService.mailPaciente = turno.paciente;
+      this.historialService.mailEspecialista = turno.especialista;
+    }
     Swal.fire({
       title: 'Mensaje de Finalizacion',
       input: 'text',
@@ -235,6 +253,7 @@ export class MisTurnosComponent {
           result.value,
           turno
         );
+        this.router.navigateByUrl('/cargarHistorialClinica');
       }
     });
   }

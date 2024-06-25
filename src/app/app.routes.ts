@@ -21,6 +21,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'registerAdmin',
+    loadComponent: () =>
+      import('./components/register/register.component').then(
+        (m) => m.RegisterComponent
+      ),
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./components/login/login.component').then(
@@ -75,6 +82,20 @@ export const routes: Routes = [
       import(
         './components/horarios-especialistas/horarios-especialistas.component'
       ).then((m) => m.HorariosEspecialistasComponent),
+  },
+  {
+    path: 'verHistorialClinica',
+    loadComponent: () =>
+      import(
+        './components/ver-historial-clinica/ver-historial-clinica.component'
+      ).then((m) => m.VerHistorialClinicaComponent),
+  },
+  {
+    path: 'cargarHistorialClinica',
+    loadComponent: () =>
+      import(
+        './components/cargar-historial-clinica/cargar-historial-clinica.component'
+      ).then((m) => m.CargarHistorialClinicaComponent),
   },
   {
     path: '**',

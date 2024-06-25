@@ -4,4 +4,5 @@ export interface especialidadInterfaceID extends especialidadInterface {
 
 export interface especialidadInterface {
   nombre: string;
+  img: string;
 }

@@ -30,6 +30,7 @@ import {
 import { Router } from '@angular/router';
 import { EspecialistaInterface } from '../interface/especialista.interface';
 import { PacienteInterface } from '../interface/paciente.interface';
+import { AdminInterface } from '../interface/admin.interface';
 
 const PATH = 'usuarios';
 
@@ -37,6 +38,8 @@ const PATH = 'usuarios';
   providedIn: 'root',
 })
 export class FirebaseAuthService {
+  mailActual: string = '';
+  passActual: string = '';
   //Auth
   firebaseAuth = inject(Auth);
   user$ = user(this.firebaseAuth);
@@ -105,7 +108,6 @@ export class FirebaseAuthService {
       return null;
     }
   }
-
   updateUsuarioEspecialista(id: string, especialista: EspecialistaInterface) {
     return updateDoc(this.document(id), { ...especialista });
   }
@@ -182,6 +184,29 @@ export class FirebaseAuthService {
           hastaSemana: 19,
           deSabado: 8,
           hastaSabado: 14,
+        };
+        await addDoc(this._collection, data).then(() => {
+          retorno = true;
+        });
+      });
+    });
+    return retorno;
+  }
+  async createUsuarioAdmin(admin: any, foto: File) {
+    let hora = new Date().getTime();
+    let ubicacion = '/' + admin.nombre + hora;
+    const imgRef = ref(this.storage, ubicacion);
+    let retorno = false;
+    await uploadBytes(imgRef, foto).then(async () => {
+      const url1 = await getDownloadURL(imgRef).then(async (resultado) => {
+        let data: AdminInterface = {
+          nombre: admin.nombre,
+          apellido: admin.apellido,
+          edad: admin.edad,
+          dni: admin.dni,
+          mail: admin.mail,
+          imagenUno: resultado,
+          rol: 'admin',
         };
         await addDoc(this._collection, data).then(() => {
           retorno = true;

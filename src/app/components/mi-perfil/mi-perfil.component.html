@@ -38,8 +38,11 @@
         Ver Horarios
       </button>
       } @if(usuarioActual?.rol == "paciente" ){
-      <button routerLink="/misTurnos" class="btn btn-success text-white mt-4">
-        Ver Turnos
+      <button
+        routerLink="/verHistorialClinica"
+        class="btn btn-success text-white mt-4"
+      >
+        Ver Historial Clinica
       </button>
       }
     </div>

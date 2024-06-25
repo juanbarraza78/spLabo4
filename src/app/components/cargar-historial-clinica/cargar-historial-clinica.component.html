@@ -1,0 +1,215 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+  <div
+    class="bg-white p-5 rounded-5 text-secondary shadow containerBackground"
+    style="width: 50rem"
+  >
+    <h2>Crear Historial Clinico</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Altura -->
+      <label for="basic-url" class="form-label mt-1">Altura</label>
+      <div class="input-group mt-1">
+        <input
+          formControlName="altura"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Ingrese la altura del paciente"
+        />
+      </div>
+      @if(form.get('altura'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      } }
+      <!-- Peso -->
+      <label for="basic-url" class="form-label mt-1">Peso</label>
+      <div class="input-group mt-1">
+        <input
+          formControlName="peso"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Ingrese el peso del paciente"
+        />
+      </div>
+      @if(form.get('peso'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      } }
+      <!-- Temperatura -->
+      <label for="basic-url" class="form-label mt-1">Temperatura</label>
+      <div class="input-group mt-1">
+        <input
+          formControlName="temperatura"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Ingrese el temperatura del paciente"
+        />
+      </div>
+      @if(form.get('temperatura'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      } }
+      <!-- Precion -->
+      <label for="basic-url" class="form-label mt-1">Precion</label>
+      <div class="input-group mt-1">
+        <input
+          formControlName="precion"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Ingrese el precion del paciente"
+        />
+      </div>
+      @if(form.get('precion'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      } }
+      <!-- Observacion 1 -->
+      <label for="basic-url" class="form-label mt-1"
+        >Observacion 1 (Opcional)</label
+      >
+      <div class="input-group mt-1">
+        <input
+          formControlName="clave1"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Clave"
+          required
+        />
+        <input
+          formControlName="valor1"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Valor"
+          required
+        />
+      </div>
+      @if(form.get('clave1'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(form.get('valor1'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Observacion 2 -->
+      <label for="basic-url" class="form-label mt-1"
+        >Observacion 2 (Opcional)</label
+      >
+      <div class="input-group mt-1">
+        <input
+          formControlName="clave2"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Clave"
+          required
+        />
+        <input
+          formControlName="valor2"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Valor"
+          required
+        />
+      </div>
+      @if(form.get('clave2'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(form.get('valor2'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Observacion 3 -->
+      <label for="basic-url" class="form-label mt-1"
+        >Observacion 3 (Opcional)</label
+      >
+      <div class="input-group mt-1">
+        <input
+          formControlName="clave3"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Clave"
+          required
+        />
+        <input
+          formControlName="valor3"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Valor"
+          required
+        />
+      </div>
+      @if(form.get('clave3'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(form.get('valor3'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Boton -->
+      <button
+        [disabled]="!form.valid"
+        type="submit"
+        class="btn btn-success text-white w-100 mt-4 fw-semibold shadow-sm"
+      >
+        Finalizar Turno
+      </button>
+    </form>
+  </div>
+</div>

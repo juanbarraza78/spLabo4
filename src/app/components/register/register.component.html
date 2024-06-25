@@ -430,8 +430,177 @@
         Sing Up
       </button>
     </form>
-    }
+    } @if(opcionAlta == "admin"){
+    <form [formGroup]="formAdmin" (ngSubmit)="onSubmitAdmin()">
+      <!-- Correo electronico -->
+      <div class="input-group mt-4">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="mail"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Email"
+        />
+      </div>
+      @if(formAdmin.get('mail'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Contraseña -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/password-icon.svg"
+            alt="password-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="password"
+          class="form-control bg-light"
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+      @if(formAdmin.get('password'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Nombre Y apellido -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="nombre"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Nombre"
+          required
+        />
+        <input
+          formControlName="apellido"
+          class="form-control bg-light"
+          type="text"
+          placeholder="Apellido"
+          required
+        />
+      </div>
+      @if(formAdmin.get('apellido'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formAdmin.get('nombre'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Edad Y Dni -->
+      <div class="input-group mt-1">
+        <div class="input-group-text colorMain">
+          <img
+            src="/assets/imgs/username-icon.svg"
+            alt="username-icon"
+            style="height: 1rem"
+          />
+        </div>
+        <input
+          formControlName="edad"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Edad"
+          required
+        />
 
+        <input
+          formControlName="dni"
+          class="form-control bg-light"
+          type="number"
+          placeholder="Dni"
+          required
+        />
+      </div>
+      @if(formAdmin.get('edad'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formAdmin.get('dni'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Foto 1 -->
+      <div class="input-group mt-1">
+        <input
+          (change)="onFileSelected4($event)"
+          type="file"
+          class="form-control"
+          formControlName="foto1"
+        />
+        <label class="input-group-text" for="inputGroupFile02">Foto 1</label>
+      </div>
+      @if(formAdmin.get('foto1'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div
+        class="alert hide alert-warning mt-2"
+        role="alert"
+        style="padding: 5px"
+      >
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Boton -->
+      <button
+        [disabled]="!formAdmin.valid"
+        type="submit"
+        class="btn colorMain text-white w-100 mt-4 fw-semibold shadow-sm"
+      >
+        Sing Up
+      </button>
+    </form>
+    }
     <div class="d-flex gap-1 justify-content-center mt-4">
       <div>have an account?</div>
       <a routerLink="/login" class="text-decoration-none text-info fw-semibold"

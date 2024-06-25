@@ -10,7 +10,7 @@
           class="btn btn-success"
           type="button"
         >
-          <img src="../../../assets/imgs/doctor.png" width="100%" alt="" />
+          <img src="../../../assets/imgs/doctor.png" width="100%" alt="doc" />
         </button>
       </div>
       <div class="col">
@@ -19,9 +19,20 @@
           class="btn btn-success"
           type="button"
         >
-          <img src="../../../assets/imgs/paciente.png" width="100%" alt="" />
+          <img src="../../../assets/imgs/paciente.png" width="100%" alt="pac" />
         </button>
       </div>
+      @if(this.authService.currentUserSig()?.rol == "admin"){
+      <div class="col">
+        <button
+          (click)="cambiarResultado('admin')"
+          class="btn btn-success"
+          type="button"
+        >
+          <img src="../../../assets/imgs/paciente.png" width="100%" alt="adm" />
+        </button>
+      </div>
+      }
     </div>
   </div>
 </div>

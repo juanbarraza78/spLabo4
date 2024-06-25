@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { EspecialistaInterfaceId } from '../../interface/especialista.interface';
 import { PacienteInterfaceId } from '../../interface/paciente.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css',
 })

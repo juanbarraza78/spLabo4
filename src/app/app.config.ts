@@ -1,6 +1,6 @@
 // Core
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withViewTransitions } from '@angular/router';
 import { routes } from './app.routes';
 // Firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -13,7 +13,7 @@ import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withViewTransitions()),
     provideFirebaseApp(() =>
       initializeApp({
         projectId: 'labo4-7e264',

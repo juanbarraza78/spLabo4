@@ -52,3 +52,18 @@ ul li:hover {
   width: 20px;
   height: 20px;
 }
+
+.boton {
+  padding: 10px;
+  font-size: 18px;
+  margin: 10px;
+}
+.contenedorBotones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 4%;
+}

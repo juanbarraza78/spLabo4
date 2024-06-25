@@ -49,6 +49,8 @@ export class LoginComponent {
           this.authService.getUsuario(value.email).then((r) => {
             if (r.rol == 'especialista') {
               if (r.estaValidado) {
+                this.authService.mailActual = value.email;
+                this.authService.passActual = value.password;
                 this.router.navigateByUrl('/');
               } else {
                 this.toastAlert.info(
@@ -58,6 +60,8 @@ export class LoginComponent {
                 this.authService.logout();
               }
             } else {
+              this.authService.mailActual = value.email;
+              this.authService.passActual = value.password;
               this.router.navigateByUrl('/');
             }
           });
