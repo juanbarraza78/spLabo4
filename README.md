@@ -38,14 +38,29 @@ Registro y Autenticación: Los pacientes podrán crear una cuenta personal y acc
 Reservar y Gestionar Turnos: Los pacientes podrán ver la disponibilidad de los especialistas y reservar turnos según su conveniencia. Los especialistas podrán gestionar sus agendas y confirmar o reprogramar citas.
 Historial Clínico Electrónico: Los pacientes tendrán acceso a un historial clínico completo y actualizado, con información detallada sobre cada consulta.
 Visualización de Gráficos Médicos: La plataforma ofrecerá herramientas gráficas para visualizar la evolución de los parámetros médicos del paciente, facilitando el seguimiento y la comprensión de su estado de salud.
+
 ## Registro
+<img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/registro.png" alt="Login" />
 
 ## Login
+<img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/Login.png" alt="Login" />
+
 ## Usuarios
+<img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/usuarios.png" alt="Login" />
+
 ## Mis turnos / Turnos
+<img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/mis_turnos.png" alt="Login" />
+
 ## Solicitar Turno
+<img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/Login.png" alt="Login" />
+
 ## Mi perfil
+<img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/mi_perfil.png" alt="Login" />
+
 ## Historial clinico
+<img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/historial_medico.png" alt="Login" />
+<img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/historial_medico_2.png" alt="Login" />
+
 ## Graficos y estadisticas
 
 
