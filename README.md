@@ -1,32 +1,53 @@
-<<<<<<< HEAD
-# spLabo4
-Tp Clínica
-=======
-# Clinica01
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+# Trabajo Practico 2 Laboratorio 4 2024
 
-## Development server
+A brief description of what this project does and who it's for
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Alumno
+- [@JuanBarraza](https://www.github.com/juanbarraza78)
+Juan Ignacio Barraza
+## Descripción del trabajo 
+Descripción del Proyecto: Página Web para Clínica de Gestión de Turnos y Consultas
+Nombre del Proyecto: Página Web para Clínica Virtual
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Objetivo del Proyecto:
+El objetivo de este proyecto es desarrollar una página web para una clínica virtual que permita a los pacientes gestionar sus turnos de manera eficiente y a los especialistas administrar sus citas. La plataforma también generará un historial clínico para cada paciente y ofrecerá gráficos detallados de su evolución médica.
 
-## Build
+Servicios Ofrecidos:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Consultas Médicas:
+La clínica virtual ofrece consultas en diversas áreas de la medicina. Los pacientes pueden reservar citas con especialistas en múltiples disciplinas.
 
-## Running unit tests
+Gestión de Turnos:
+La página web permite a los pacientes generar turnos de manera sencilla y rápida. Los especialistas pueden administrar y organizar sus citas, optimizando así el flujo de trabajo y reduciendo tiempos de espera.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Historial Clínico:
+Cada paciente tendrá acceso a su historial clínico digital. Este historial incluirá detalles de todas las consultas, diagnósticos, tratamientos y recomendaciones médicas.
 
-## Running end-to-end tests
+Gráficos Médicos:
+La plataforma generará gráficos interactivos que mostrarán la evolución de la salud del paciente a lo largo del tiempo. Estos gráficos ayudarán tanto a los pacientes como a los médicos a visualizar tendencias y tomar decisiones informadas.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Horario de Atención:
 
-## Further help
+Lunes a Viernes: 08:00 - 19:00
+Sábados: 08:00 - 14:00
+Funcionalidades de la Página Web:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
->>>>>>> 28ded4a (initial commit)
+Registro y Autenticación: Los pacientes podrán crear una cuenta personal y acceder a sus datos médicos de forma segura.
+Reservar y Gestionar Turnos: Los pacientes podrán ver la disponibilidad de los especialistas y reservar turnos según su conveniencia. Los especialistas podrán gestionar sus agendas y confirmar o reprogramar citas.
+Historial Clínico Electrónico: Los pacientes tendrán acceso a un historial clínico completo y actualizado, con información detallada sobre cada consulta.
+Visualización de Gráficos Médicos: La plataforma ofrecerá herramientas gráficas para visualizar la evolución de los parámetros médicos del paciente, facilitando el seguimiento y la comprensión de su estado de salud.
+## Registro
+
+## Login
+## Usuarios
+## Mis turnos / Turnos
+## Solicitar Turno
+## Mi perfil
+## Historial clinico
+## Graficos y estadisticas
+
+
+
+
