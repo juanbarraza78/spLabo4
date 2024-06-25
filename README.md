@@ -1,13 +1,12 @@
-
 # Trabajo Practico 2 Laboratorio 4 2024
 
-A brief description of what this project does and who it's for
-
-
 ## Alumno
+
 - [@JuanBarraza](https://www.github.com/juanbarraza78)
-Juan Ignacio Barraza
-## Descripción del trabajo 
+  Juan Ignacio Barraza
+
+## Descripción del trabajo
+
 Descripción del Proyecto: Página Web para Clínica de Gestión de Turnos y Consultas
 Nombre del Proyecto: Página Web para Clínica Virtual
 
@@ -40,29 +39,32 @@ Historial Clínico Electrónico: Los pacientes tendrán acceso a un historial cl
 Visualización de Gráficos Médicos: La plataforma ofrecerá herramientas gráficas para visualizar la evolución de los parámetros médicos del paciente, facilitando el seguimiento y la comprensión de su estado de salud.
 
 ## Registro
+
 <img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/registro.png" alt="Login" />
 
 ## Login
+
 <img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/Login.png" alt="Login" />
 
 ## Usuarios
+
 <img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/usuarios.png" alt="Login" />
 
 ## Mis turnos / Turnos
+
 <img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/mis_turnos.png" alt="Login" />
 
 ## Solicitar Turno
+
 <img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/Login.png" alt="Login" />
 
 ## Mi perfil
+
 <img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/mi_perfil.png" alt="Login" />
 
 ## Historial clinico
+
 <img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/historial_medico.png" alt="Login" />
 <img src="https://github.com/juanbarraza78/spLabo4/blob/main/src/imgGitHub/historial_medico_2.png" alt="Login" />
 
 ## Graficos y estadisticas
-
-
-
-
