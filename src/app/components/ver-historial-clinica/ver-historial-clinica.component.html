@@ -4,7 +4,7 @@
     @if(authService.currentUserSig()?.rol == 'admin' ||
     authService.currentUserSig()?.rol == 'especialista' ||
     authService.currentUserSig()?.rol == 'paciente'){
-    <!-- Lista Turnos Pacientes -->
+    <!-- Lista Historia clinica Pacientes -->
     <div class="row">
       @for (historial of listaHistorial; track historial.id){
       <div class="col-md-6 col-sm-12 mt-3">
@@ -12,6 +12,9 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               Paciente: {{ historial.mailPaciente }}
+            </li>
+            <li class="list-group-item">
+              Especialidad: {{ historial.especialidad }}
             </li>
             <li class="list-group-item">
               Temperatura: {{ historial.temperatura }}
@@ -40,6 +43,51 @@
               Descargar PDF
             </button>
           </div>
+        </div>
+      </div>
+      }
+    </div>
+    <!-- Select especialidad -->
+    <form [formGroup]="form" (ngSubmit)="onSummitEspecialidad()">
+      <div class="selectEspecialidad mt-3 mb-3">
+        <select
+          formControlName="especialidad"
+          class="form-select mt-3 mb-3"
+          aria-label="Default select example"
+        >
+          @for (especialidad of arrayEspecialidades; track $index) {
+          @if(especialidad.nombre != "Todos" && especialidad.nombre != "Otro"){
+          <option value="{{ especialidad.nombre }}">
+            {{ especialidad.nombre }}
+          </option>
+          } }
+        </select>
+        <button type="submit" class="btn btn-success m-1">
+          Descargar Todos PDF
+        </button>
+      </div>
+    </form>
+
+    <!-- Lista Turnos Pacientes -->
+    } @if(authService.currentUserSig()?.rol == 'paciente'){
+
+    <h1>Ultimos 3 Turnos</h1>
+    <div class="row">
+      @for (turno of getLastThreeTurnos(); track turno.id){
+      <div class="col-md-6 col-sm-12 mt-3">
+        <div class="card" style="width: 100%">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Estado: {{ turno.estado }}</li>
+            <li class="list-group-item">Fecha: {{ turno.date }}</li>
+            <li class="list-group-item">Horario: {{ turno.time }}</li>
+            <li class="list-group-item">Paciente: {{ turno.paciente }}</li>
+            <li class="list-group-item">
+              Especialista: {{ turno.especialista }}
+            </li>
+            <li class="list-group-item">
+              Especialidad: {{ turno.especialidad }}
+            </li>
+          </ul>
         </div>
       </div>
       }

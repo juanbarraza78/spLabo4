@@ -9,6 +9,9 @@ import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { LogInterface } from '../../interface/log.interface';
+import { LogsService } from '../../services/logs.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +26,8 @@ export class LoginComponent {
   authService = inject(FirebaseAuthService);
   router = inject(Router);
   elementRef = inject(ElementRef);
+  logService = inject(LogsService);
+  datePipe = inject(DatePipe);
 
   imgUsuario1?: string;
   imgUsuario2?: string;
@@ -51,7 +56,14 @@ export class LoginComponent {
               if (r.estaValidado) {
                 this.authService.mailActual = value.email;
                 this.authService.passActual = value.password;
-                this.router.navigateByUrl('/');
+                const logAux: LogInterface = {
+                  email: value.email,
+                  date: this.getFechaActual(),
+                  time: this.getHorarioActual(),
+                };
+                this.logService.saveAll(logAux).then(() => {
+                  this.router.navigateByUrl('/');
+                });
               } else {
                 this.toastAlert.info(
                   'Email todavia no esta validado',
@@ -62,7 +74,14 @@ export class LoginComponent {
             } else {
               this.authService.mailActual = value.email;
               this.authService.passActual = value.password;
-              this.router.navigateByUrl('/');
+              const logAux: LogInterface = {
+                email: value.email,
+                date: this.getFechaActual(),
+                time: this.getHorarioActual(),
+              };
+              this.logService.saveAll(logAux).then(() => {
+                this.router.navigateByUrl('/');
+              });
             }
           });
         } else {
@@ -77,6 +96,15 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.obtenerImgUsuario();
+  }
+  getFechaActual(): string {
+    const fecha = new Date();
+    return this.datePipe.transform(fecha, 'dd/MM/yyyy') || '';
+  }
+
+  getHorarioActual(): string {
+    const horario = new Date();
+    return this.datePipe.transform(horario, 'HH:mm') || '';
   }
 
   obtenerImgUsuario() {

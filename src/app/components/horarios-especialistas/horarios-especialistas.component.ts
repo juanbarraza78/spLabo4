@@ -43,6 +43,7 @@ export class HorariosEspecialistasComponent {
             hastaSemana: parseInt(value.hastaSemana),
             deSabado: parseInt(value.deSabado),
             hastaSabado: parseInt(value.hastaSabado),
+            usuariosAtentidos: r.usuariosAtentidos,
           };
           this.authService
             .updateUsuarioEspecialista(r.id, data)

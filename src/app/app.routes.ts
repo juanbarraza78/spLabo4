@@ -98,6 +98,13 @@ export const routes: Routes = [
       ).then((m) => m.CargarHistorialClinicaComponent),
   },
   {
+    path: 'estadisticas',
+    loadComponent: () =>
+      import('./components/estadisticas/estadisticas.component').then(
+        (m) => m.EstadisticasComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

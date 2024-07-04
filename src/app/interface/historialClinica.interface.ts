@@ -8,5 +8,7 @@ export interface historialInterface {
   precion: number | undefined;
   arrayObservaciones: string[];
   mailPaciente: string | undefined;
-  mailEspecialistas: string[];
+  mailEspecialistas: string;
+  idTurno: string;
+  especialidad: string;
 }

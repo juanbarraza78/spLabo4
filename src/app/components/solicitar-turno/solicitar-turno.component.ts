@@ -117,8 +117,13 @@ export class SolicitarTurnoComponent {
     for (let i = 0; i < 15; i++) {
       const futureDate = new Date(today);
       futureDate.setDate(today.getDate() + i);
-      const dayOfWeek = daysOfWeek[futureDate.getDay()];
 
+      // Omitir si es domingo
+      if (futureDate.getDay() === 0) {
+        continue;
+      }
+
+      const dayOfWeek = daysOfWeek[futureDate.getDay()];
       const buttons = this.generateButtons(futureDate, usuario);
 
       this.futureDays.push({
@@ -233,12 +238,11 @@ export class SolicitarTurnoComponent {
   }
   reservar() {
     if (this.especialistaElegido && this.especialidadElegida) {
-      console.log(this.especialistaElegido);
-      console.log(this.especialidadElegida);
       if (this.turnosElegidos.length == 0) {
-        console.log('No hay ningun turno');
         this.toastAlert.error('No hay ningun turno', 'Error');
       } else {
+        let savePromises: Promise<void>[] = []; // Array para almacenar las promesas
+
         this.turnosElegidos.forEach((btn) => {
           console.log('turno');
           if (this.authService.currentUserSig()?.rol == 'admin') {
@@ -255,16 +259,18 @@ export class SolicitarTurnoComponent {
                 comentarioPaciente: '',
                 comentarioEspecialista: '',
               };
-              this.turnosService
-                .saveTurno(turnoAux)
-                .then(() => {
-                  this.toastAlert.success('Reservacion completada', 'Exito');
-                  console.log('Reservacion completada');
-                })
-                .catch(() => {
-                  this.toastAlert.error('Error al crear un Turno', 'Error');
-                  console.log('Error al crear un Turno');
-                });
+              savePromises.push(
+                this.turnosService
+                  .saveTurno(turnoAux)
+                  .then(() => {
+                    this.toastAlert.success('Reservacion completada', 'Exito');
+                    console.log('Reservacion completada');
+                  })
+                  .catch(() => {
+                    this.toastAlert.error('Error al crear un Turno', 'Error');
+                    console.log('Error al crear un Turno');
+                  })
+              );
             } else {
               this.toastAlert.error('Falta elegir paciente', 'Error');
               console.log('Falta elegir paciente');
@@ -282,19 +288,26 @@ export class SolicitarTurnoComponent {
               comentarioPaciente: '',
               comentarioEspecialista: '',
             };
-            this.turnosService
-              .saveTurno(turnoAux)
-              .then(() => {
-                this.toastAlert.success('Reservacion completada', 'Exito');
-                console.log('Reservacion completada');
-              })
-              .catch(() => {
-                this.toastAlert.error('Error al crear un Turno', 'Error');
-                console.log('error al crear un Turno');
-              });
+            savePromises.push(
+              this.turnosService
+                .saveTurno(turnoAux)
+                .then(() => {
+                  this.toastAlert.success('Reservacion completada', 'Exito');
+                  console.log('Reservacion completada');
+                })
+                .catch(() => {
+                  this.toastAlert.error('Error al crear un Turno', 'Error');
+                  console.log('Error al crear un Turno');
+                })
+            );
           } else {
             console.log('no hay rol');
           }
+        });
+
+        // Esperar a que todas las promesas se resuelvan
+        Promise.all(savePromises).then(() => {
+          this.router.navigate(['/home']);
         });
       }
     } else {

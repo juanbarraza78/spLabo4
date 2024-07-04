@@ -36,70 +36,31 @@ export class CargarHistorialClinicaComponent {
   async onSubmit() {
     if (this.form.valid) {
       let value = this.form.getRawValue();
-      console.log(value);
-      console.log(this.historialService.mailEspecialista);
-      console.log(this.historialService.mailPaciente);
-      let respuesta = await this.historialService.getHistoriaClinicaId(
-        this.historialService.mailPaciente
-      );
-      if (respuesta == null) {
-        const historialAux: historialInterface = {
-          altura: value.altura,
-          peso: value.peso,
-          temperatura: value.temperatura,
-          precion: value.precion,
-          arrayObservaciones: [
-            value.clave1,
-            value.valor1,
-            value.clave2,
-            value.valor2,
-            value.clave3,
-            value.valor3,
-          ],
-          mailPaciente: this.historialService.mailPaciente,
-          mailEspecialistas: [this.historialService.mailEspecialista],
-        };
-        this.historialService.saveHistoriaClinica(historialAux).then(() => {
-          this.toastAlert.success(
-            'Se creo el historial clinico Correctamente',
-            'Exito'
-          );
-        });
-      } else {
-        if (
-          !respuesta.mailEspecialistas.includes(
-            this.historialService.mailEspecialista
-          )
-        ) {
-          respuesta.mailEspecialistas.push(
-            this.historialService.mailEspecialista
-          );
-        }
-        const historialAux: historialInterface = {
-          altura: value.altura,
-          peso: value.peso,
-          temperatura: value.temperatura,
-          precion: value.precion,
-          arrayObservaciones: [
-            value.clave1,
-            value.valor1,
-            value.clave2,
-            value.valor2,
-            value.clave3,
-            value.valor3,
-          ],
-          mailPaciente: this.historialService.mailPaciente,
-          mailEspecialistas: [this.historialService.mailEspecialista],
-        };
-        this.historialService
-          .updateHistoriaClinica(respuesta.id, historialAux)
-          .then(() => {
-            this.toastAlert.success(
-              'Se modifico el historial clinico Correctamente',
-              'Exito'
-            );
-          });
-      }
+      const historialAux: historialInterface = {
+        altura: value.altura,
+        peso: value.peso,
+        temperatura: value.temperatura,
+        precion: value.precion,
+        arrayObservaciones: [
+          value.clave1,
+          value.valor1,
+          value.clave2,
+          value.valor2,
+          value.clave3,
+          value.valor3,
+        ],
+        mailPaciente: this.historialService.mailPaciente,
+        mailEspecialistas: this.historialService.mailEspecialista,
+        idTurno: this.historialService.idTurno,
+        especialidad: this.historialService.especialidadEspecialista,
+      };
+      this.historialService.saveHistoriaClinica(historialAux).then(() => {
+        this.toastAlert.success(
+          'Se creo el historial clinico Correctamente',
+          'Exito'
+        );
+      });
+
       this.form.reset();
       this.router.navigateByUrl('/misTurnos');
     }

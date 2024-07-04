@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { HistorialClinicaService } from '../../services/historial-clinica.service';
+import { especialidadInterface } from '../../interface/especialidad.interface';
+import { EspecialistaInterface } from '../../interface/especialista.interface';
 
 @Component({
   selector: 'app-mis-turnos',
@@ -51,29 +53,46 @@ export class MisTurnosComponent {
       }
     }, 2500);
   }
+
   async buscar() {
+    this.listaTurnosPacientesFiltrado = [];
     const term = this.buscarString.toLowerCase();
     if (
       this.authService.currentUserSig()?.rol == 'paciente' ||
       this.authService.currentUserSig()?.rol == 'especialista'
     ) {
       // Poner filtro del historial
-      this.listaTurnosPacientesFiltrado = this.listaTurnosPacientes.filter(
-        (turno) => {
+      this.listaTurnosPacientes.forEach(async (turno) => {
+        let esValido: boolean = false;
+        const historialTurno =
+          await this.historialService.getHistoriaClinicaIdTurno(turno.id);
+        if (historialTurno) {
           if (
-            turno.especialidad?.toLowerCase().includes(term) ||
-            turno.especialista?.toLowerCase().includes(term) ||
-            turno.date?.toLowerCase().includes(term) ||
-            turno.estado?.toLowerCase().includes(term) ||
-            turno.time?.toLowerCase().includes(term) ||
-            turno.paciente?.toLowerCase().includes(term)
+            historialTurno.altura == term ||
+            historialTurno.peso == term ||
+            historialTurno.temperatura == term ||
+            historialTurno.precion == term ||
+            historialTurno.arrayObservaciones[1]?.toLowerCase() == term ||
+            historialTurno.arrayObservaciones[3]?.toLowerCase() == term ||
+            historialTurno.arrayObservaciones[5]?.toLowerCase() == term
           ) {
-            return true;
-          } else {
-            return false;
+            esValido = true;
           }
         }
-      );
+        if (
+          turno.especialidad?.toLowerCase().includes(term) ||
+          turno.especialista?.toLowerCase().includes(term) ||
+          turno.date?.toLowerCase().includes(term) ||
+          turno.estado?.toLowerCase().includes(term) ||
+          turno.time?.toLowerCase().includes(term) ||
+          turno.paciente?.toLowerCase().includes(term)
+        ) {
+          esValido = true;
+        }
+        if (esValido) {
+          this.listaTurnosPacientesFiltrado.push(turno);
+        }
+      });
     }
   }
 
@@ -226,9 +245,16 @@ export class MisTurnosComponent {
     });
   }
   especialistaFinalizarTurno(turno: turnoInterfaceID) {
-    if (turno.paciente != undefined && turno.especialista != undefined) {
+    if (
+      turno.paciente != undefined &&
+      turno.especialista != undefined &&
+      turno.id != undefined &&
+      turno.especialidad != undefined
+    ) {
       this.historialService.mailPaciente = turno.paciente;
       this.historialService.mailEspecialista = turno.especialista;
+      this.historialService.idTurno = turno.id;
+      this.historialService.especialidadEspecialista = turno.especialidad;
     }
     Swal.fire({
       title: 'Mensaje de Finalizacion',
@@ -246,8 +272,30 @@ export class MisTurnosComponent {
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        // Modificar
-        console.log(result);
+        this.authService.getUsuarioId(turno.especialista).then((r) => {
+          const arrayAux: string[] = r.usuariosAtentidos;
+          const existe = arrayAux.some((user) => user == turno.paciente);
+          if (!existe && turno.paciente) {
+            arrayAux.push(turno.paciente);
+          }
+          const especialistaAix: EspecialistaInterface = {
+            nombre: r.nombre,
+            apellido: r.apellido,
+            edad: r.edad,
+            dni: r.dni,
+            especialidad: r.especialidad,
+            mail: r.mail,
+            imagenUno: r.imagenUno,
+            rol: r.rol,
+            estaValidado: r.estaValidado,
+            deSemana: r.deSemana,
+            hastaSemana: r.hastaSemana,
+            deSabado: r.deSabado,
+            hastaSabado: r.hastaSabado,
+            usuariosAtentidos: arrayAux,
+          };
+          this.authService.updateUsuarioEspecialista(r.id, especialistaAix);
+        });
         this.modificarEstadoComentarioEspecialista(
           'realizado',
           result.value,

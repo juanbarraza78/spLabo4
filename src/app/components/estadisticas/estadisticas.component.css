@@ -5,14 +5,4 @@
 }
 .containerBackground {
   margin-top: 180px;
-  width: 90%;
-}
-a {
-  font-size: 12px;
-  min-height: 50px;
-  display: flex;
-  align-items: center;
-}
-.selectEspecialidad {
-  display: flex;
 }

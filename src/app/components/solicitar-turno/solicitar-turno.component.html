@@ -69,7 +69,11 @@
     <div class="turnos">
       <h2 class="h2 mb-4">Turnos Disponibles</h2>
       @if(especialistaElegido){ @for (day of futureDays; track $index) {
-      <button (click)="onDayClick(day.date)" class="btn btn-success m-1">
+      <button
+        (click)="onDayClick(day.date)"
+        class="btn btn-success m-1"
+        [ngClass]="{ 'btn-info': day.date == this.selectedDay?.date }"
+      >
         {{ day.date }}
       </button>
       }
@@ -89,7 +93,6 @@
       } }
     </div>
     }
-
     <!-- Boton resevar -->
     <button class="btn btn-success m-1" (click)="reservar()">
       Reservar Turno

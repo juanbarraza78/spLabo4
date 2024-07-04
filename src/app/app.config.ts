@@ -10,6 +10,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 // Ngx Charts
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,5 +34,6 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    DatePipe,
   ],
 };

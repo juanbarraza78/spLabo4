@@ -31,6 +31,8 @@ export class HistorialClinicaService {
 
   mailPaciente: string = '';
   mailEspecialista: string = '';
+  idTurno: string = '';
+  especialidadEspecialista: string = '';
 
   saveHistoriaClinica(historial: historialInterface) {
     return addDoc(this._collection, historial);
@@ -47,6 +49,24 @@ export class HistorialClinicaService {
       this._collection,
       where('mailPaciente', '==', emailPaciente)
     );
+    const usersSnapshot = await getDocs(q);
+    if (!usersSnapshot.empty) {
+      const userDoc = usersSnapshot.docs[0];
+      const userData = userDoc.data();
+      return (
+        {
+          id: userDoc.id,
+          ...userData,
+        } || null
+      );
+    } else {
+      return null;
+    }
+  }
+  async getHistoriaClinicaIdTurno(
+    idTurno: string | undefined | null
+  ): Promise<any> {
+    const q = query(this._collection, where('idTurno', '==', idTurno));
     const usersSnapshot = await getDocs(q);
     if (!usersSnapshot.empty) {
       const userDoc = usersSnapshot.docs[0];

@@ -184,6 +184,7 @@ export class FirebaseAuthService {
           hastaSemana: 19,
           deSabado: 8,
           hastaSabado: 14,
+          usuariosAtentidos: [],
         };
         await addDoc(this._collection, data).then(() => {
           retorno = true;

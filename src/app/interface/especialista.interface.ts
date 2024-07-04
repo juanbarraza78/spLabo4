@@ -15,5 +15,6 @@ export interface EspecialistaInterface {
   hastaSemana: number;
   deSabado: number;
   hastaSabado: number;
+  usuariosAtentidos: string[];
   // password: string;
 }

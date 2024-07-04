@@ -33,7 +33,32 @@
         <img width="20px" [src]="usuario.imagenUno" alt="" />
       </li>
       }
+      <!-- Ejemplos -->
+      <div class="row">
+        @for (usuario of usuariosPacientes; track $index) {
+        <div class="col">
+          <div class="contenedorEspecialistas">
+            <button
+              (click)="clickUsuario(usuario.mail)"
+              class="btn btn-success m-1 boton"
+            >
+              <img
+                [src]="usuario.imagenUno"
+                alt=""
+                width="40px"
+                height="40px"
+              />
+            </button>
+            <span class="p nombreEspecialista"
+              >{{ usuario.nombre }} {{ usuario.apellido }}</span
+            >
+          </div>
+        </div>
+        }
+      </div>
     </ul>
+
+    <!-- Botones usuarios -->
     <div class="contenedorBotones">
       <button
         type="button"
