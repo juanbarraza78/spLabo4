@@ -10,6 +10,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { turnoInterfaceID } from '../../interface/turno.interface';
 import { TurnosService } from '../../services/turnos.service';
+import { UppercasePipe } from '../../pipes/uppercase.pipe';
+import { LowercasePipe } from '../../pipes/lowercase.pipe';
 
 @Component({
   selector: 'app-usuarios',
@@ -20,6 +22,8 @@ import { TurnosService } from '../../services/turnos.service';
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    LowercasePipe,
+    UppercasePipe,
   ],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css',

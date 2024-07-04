@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav appEnlargeOnClick class="navbar navbar-expand-lg fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand me-auto" routerLink="home">Clinica</a>
     <div
@@ -21,53 +21,83 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" aria-current="page" routerLink="home"
+            <a
+              appHighlightOnHover
+              class="nav-link mx-lg-2"
+              aria-current="page"
+              routerLink="home"
               >Home</a
             >
           </li>
           @if(authService.currentUserSig()?.rol == "admin"){
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" routerLink="usuarios">Usuarios</a>
+            <a
+              appHighlightOnHover
+              class="nav-link mx-lg-2"
+              routerLink="usuarios"
+              >Usuarios</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" routerLink="estadisticas"
+            <a
+              appHighlightOnHover
+              class="nav-link mx-lg-2"
+              routerLink="estadisticas"
               >Estadisticas</a
             >
           </li>
           } @if(authService.currentUserSig()?.rol == "paciente" ||
           authService.currentUserSig()?.rol == "admin"){
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" routerLink="solicitarTurno"
+            <a
+              appHighlightOnHover
+              class="nav-link mx-lg-2"
+              routerLink="solicitarTurno"
               >Solicitar Turno</a
             >
           </li>
           } @if(authService.currentUserSig()?.rol == "paciente" ||
           authService.currentUserSig()?.rol == "especialista"){
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" routerLink="misTurnos">Mis Turnos</a>
+            <a
+              appHighlightOnHover
+              class="nav-link mx-lg-2"
+              routerLink="misTurnos"
+              >Mis Turnos</a
+            >
           </li>
           } @if(authService.currentUserSig()?.rol == "admin"){
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" routerLink="turnos">Turnos</a>
+            <a appHighlightOnHover class="nav-link mx-lg-2" routerLink="turnos"
+              >Turnos</a
+            >
           </li>
           } @if(authService.currentUserSig()?.rol == "especialista"){
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" routerLink="/verHistorialClinica"
+            <a
+              appHighlightOnHover
+              class="nav-link mx-lg-2"
+              routerLink="/verHistorialClinica"
               >Pacientes</a
             >
           </li>
           } @if(authService.currentUserSig() != null){
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" routerLink="miPerfil">Mi Perfil</a>
+            <a
+              appHighlightOnHover
+              class="nav-link mx-lg-2"
+              routerLink="miPerfil"
+              >Mi Perfil</a
+            >
           </li>
           }
         </ul>
       </div>
     </div>
     @if(this.authService.currentUserSig() == null){
-    <a routerLink="login" class="login-button">Login</a>
+    <a appHighlightOnHover routerLink="login" class="login-button">Login</a>
     } @if(this.authService.currentUserSig()){
-    <a (click)="logout()" class="logout-button">Log Out</a>
+    <a appHighlightOnHover (click)="logout()" class="logout-button">Log Out</a>
     }
 
     <button

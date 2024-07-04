@@ -1,9 +1,18 @@
-<div class="d-flex justify-content-center align-items-center min-100vh">
+<div class="min-100vh">
   <div class="bg-white p-5 rounded-5 text-secondary shadow containerBackground">
-    <app-graficos></app-graficos>
-    <app-graficos-turno-especialidad></app-graficos-turno-especialidad>
-    <app-graficos-turno-por-dia></app-graficos-turno-por-dia>
-    <app-graficos-medico-por-dia></app-graficos-medico-por-dia>
-    <app-graficos-finalizado-medico-por-dia></app-graficos-finalizado-medico-por-dia>
+    <h2 class="mt-5">Logs ingresados</h2>
+    <app-graficos class="centrado"></app-graficos>
+    <h2 class="mt-5">Turnos por especialidad</h2>
+    <app-graficos-turno-especialidad
+      class="centrado"
+    ></app-graficos-turno-especialidad>
+    <h2 class="mt-5">Turnos por dia</h2>
+    <app-graficos-turno-por-dia class="centrado"></app-graficos-turno-por-dia>
+    <h2 class="mt-5">Turnos por especialista</h2>
+    <app-graficos-medico-por-dia class="centrado"></app-graficos-medico-por-dia>
+    <h2 class="mt-5">Turnos finalizados por especialista</h2>
+    <app-graficos-finalizado-medico-por-dia
+      class="centrado"
+    ></app-graficos-finalizado-medico-por-dia>
   </div>
 </div>

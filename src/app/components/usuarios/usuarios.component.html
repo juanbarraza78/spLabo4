@@ -24,11 +24,11 @@
       <h2 class="h2 text-white">Pacientes</h2>
       @for (usuario of usuariosPacientes; track usuario.id){
       <li>
-        <span>{{ usuario.nombre }}</span>
-        <span>{{ usuario.apellido }}</span>
+        <span>{{ usuario.nombre | uppercase }} </span>
+        <span>{{ usuario.apellido | uppercase }}</span>
         <span>{{ usuario.edad }}</span>
         <span>{{ usuario.dni }}</span>
-        <span>{{ usuario.obraSocial }}</span>
+        <span>{{ usuario.obraSocial | lowercase }}</span>
         <span>{{ usuario.mail }}</span>
         <img width="20px" [src]="usuario.imagenUno" alt="" />
       </li>

@@ -1,3 +1,27 @@
+<div class="input-group mb-3 mt-2">
+  <input
+    [(ngModel)]="startDate"
+    type="text"
+    class="form-control"
+    placeholder="Fecha Inicio"
+    aria-label="Username"
+  />
+  <input
+    [(ngModel)]="endDate"
+    type="text"
+    class="form-control"
+    placeholder="Fecha Final"
+    aria-label="Server"
+  />
+  <button
+    (click)="clickBuscar()"
+    class="btn btn-outline-secondary"
+    type="button"
+    id="button-addon2"
+  >
+    Buscar
+  </button>
+</div>
 <ngx-charts-pie-chart
   [view]="view"
   [scheme]="colorScheme"
@@ -9,5 +33,9 @@
   (select)="onSelect($event)"
   (activate)="onActivate($event)"
   (deactivate)="onDeactivate($event)"
+  legendTitle="Especialista"
 >
 </ngx-charts-pie-chart>
+<button (click)="descargarPDF(single)" type="button" class="btn btn-success">
+  Descargar
+</button>

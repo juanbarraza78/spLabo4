@@ -7,6 +7,7 @@ import { GraficosTurnoEspecialidadComponent } from '../graficos-turno-especialid
 import { GraficosTurnoPorDiaComponent } from '../graficos-turno-por-dia/graficos-turno-por-dia.component';
 import { GraficosMedicoPorDiaComponent } from '../graficos-medico-por-dia/graficos-medico-por-dia.component';
 import { GraficosFinalizadoMedicoPorDiaComponent } from '../graficos-finalizado-medico-por-dia/graficos-finalizado-medico-por-dia.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-estadisticas',
@@ -17,11 +18,14 @@ import { GraficosFinalizadoMedicoPorDiaComponent } from '../graficos-finalizado-
     GraficosTurnoPorDiaComponent,
     GraficosMedicoPorDiaComponent,
     GraficosFinalizadoMedicoPorDiaComponent,
+    CommonModule,
   ],
   templateUrl: './estadisticas.component.html',
   styleUrl: './estadisticas.component.css',
 })
 export class EstadisticasComponent {
+  starDate1: string = '';
+  endDate1: string = '';
   authService = inject(FirebaseAuthService);
   logService = inject(LogsService);
 

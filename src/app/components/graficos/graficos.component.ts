@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { LogInterfaceID } from '../../interface/log.interface';
 import { LogsService } from '../../services/logs.service';
+import jsPDF from 'jspdf';
 
 interface GroupedLog {
   name: string;
@@ -19,7 +20,7 @@ export class GraficosComponent {
   logService = inject(LogsService);
 
   logs: LogInterfaceID[] = [];
-  view: [number, number] = [700, 400];
+  view: [number, number] = [500, 400];
 
   // options
   showXAxis = true;
@@ -80,5 +81,47 @@ export class GraficosComponent {
   timeToNumber(time: string): number {
     const [hours, minutes] = time.split(':').map(Number);
     return hours + minutes / 60;
+  }
+
+  descargarPDF(turnos: GroupedLog[]) {
+    const doc = new jsPDF();
+    doc.addImage('../../../assets/imgs/logo.png', 'PNG', 10, 10, 60, 30);
+    doc.setFont('Helvetica');
+    doc.setFontSize(40);
+    doc.text('La Clinica', 80, 20);
+
+    doc.setFontSize(30);
+    doc.text('Historial Clinico', 80, 30);
+
+    doc.setFontSize(25);
+    let y = 60;
+
+    turnos.forEach((turno) => {
+      doc.setFontSize(25);
+      y += 10;
+      doc.text(`Usuario: ${turno.name}`, 10, y);
+      doc.setFontSize(20);
+      turno.series.forEach((a) => {
+        y += 10;
+        doc.text(`Fecha: ${a.name} `, 10, y);
+      });
+    });
+
+    doc.text(`Fecha: ${this.obtenerFechaActual()}`, 10, y + 30);
+
+    doc.save(`Turnos_clinica.pdf`);
+  }
+
+  obtenerFechaActual(): string {
+    const fecha = new Date();
+
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses en JavaScript son de 0 a 11
+    const año = fecha.getFullYear();
+
+    const horas = String(fecha.getHours()).padStart(2, '0');
+    const minutos = String(fecha.getMinutes()).padStart(2, '0');
+
+    return `${dia}/${mes}/${año} ${horas}:${minutos}`;
   }
 }
