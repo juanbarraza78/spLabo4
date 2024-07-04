@@ -36,6 +36,8 @@ export class LoginComponent {
   imgUsuario5?: string;
   imgUsuario6?: string;
 
+  flag: boolean = false;
+
   form = this.fb.nonNullable.group({
     email: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -43,17 +45,37 @@ export class LoginComponent {
 
   executeRecaptcha(token: any) {
     console.log(token);
+    this.flag = true;
   }
 
   onSubmit(): void {
-    const value = this.form.getRawValue();
-    this.authService
-      .login(value.email, value.password)
-      .then((r) => {
-        if (r.user.emailVerified) {
-          this.authService.getUsuario(value.email).then((r) => {
-            if (r.rol == 'especialista') {
-              if (r.estaValidado) {
+    if (this.flag) {
+      const value = this.form.getRawValue();
+      this.authService
+        .login(value.email, value.password)
+        .then((r) => {
+          if (r.user.emailVerified) {
+            this.authService.getUsuario(value.email).then((r) => {
+              if (r.rol == 'especialista') {
+                if (r.estaValidado) {
+                  this.authService.mailActual = value.email;
+                  this.authService.passActual = value.password;
+                  const logAux: LogInterface = {
+                    email: value.email,
+                    date: this.getFechaActual(),
+                    time: this.getHorarioActual(),
+                  };
+                  this.logService.saveAll(logAux).then(() => {
+                    this.router.navigateByUrl('/');
+                  });
+                } else {
+                  this.toastAlert.info(
+                    'Email todavia no esta validado',
+                    'Intentelo mas tarde'
+                  );
+                  this.authService.logout();
+                }
+              } else {
                 this.authService.mailActual = value.email;
                 this.authService.passActual = value.password;
                 const logAux: LogInterface = {
@@ -64,34 +86,19 @@ export class LoginComponent {
                 this.logService.saveAll(logAux).then(() => {
                   this.router.navigateByUrl('/');
                 });
-              } else {
-                this.toastAlert.info(
-                  'Email todavia no esta validado',
-                  'Intentelo mas tarde'
-                );
-                this.authService.logout();
               }
-            } else {
-              this.authService.mailActual = value.email;
-              this.authService.passActual = value.password;
-              const logAux: LogInterface = {
-                email: value.email,
-                date: this.getFechaActual(),
-                time: this.getHorarioActual(),
-              };
-              this.logService.saveAll(logAux).then(() => {
-                this.router.navigateByUrl('/');
-              });
-            }
-          });
-        } else {
-          this.toastAlert.info('Verifique su email', 'Intentelo mas tarde');
-          this.authService.logout();
-        }
-      })
-      .catch(() => {
-        this.toastAlert.error('Email o Password incorrect', 'Login Error');
-      });
+            });
+          } else {
+            this.toastAlert.info('Verifique su email', 'Intentelo mas tarde');
+            this.authService.logout();
+          }
+        })
+        .catch(() => {
+          this.toastAlert.error('Email o Password incorrect', 'Login Error');
+        });
+    } else {
+      this.toastAlert.error('Falta Captcha', 'Login Error');
+    }
   }
 
   ngOnInit(): void {
